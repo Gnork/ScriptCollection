@@ -13,15 +13,16 @@ import javax.imageio.ImageIO;
 
 public class Collage {
 
-    static String imagesPath = "";
-        
+    static String imagesPath = "path/to/patches";
+    static int startIndex = 0;
+
     static int bgAlpha = 0;
     static int bgRed = 255;
     static int bgGreen = 255;
     static int bgBlue = 255;
 
-    static int patchWidth = 32;
-    static int patchHeight = 32;
+    static int patchWidth = 64;
+    static int patchHeight = 64;
 
     static int rows = 7;
     static int cols = 14;
@@ -45,9 +46,9 @@ public class Collage {
         g.fillRect(0, 0, collageWidth, collageHeight);
         
         for(int row = 0; row < rows; ++row){
-            for(int col = 0; col < cols; ++col){    
+            for(int col = 0; col < cols; ++col){
                 
-                Image patch = ImageIO.read(images[(row * cols + col) % images.length]);
+                Image patch = ImageIO.read(images[(startIndex++) % images.length]);
                 Image scaled = patch.getScaledInstance(patchWidth, patchHeight, Image.SCALE_SMOOTH);
                 
                 int xPos = col * patchWidth + col * colSpacing;
